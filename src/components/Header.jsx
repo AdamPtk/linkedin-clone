@@ -10,7 +10,7 @@ import HeaderOption from './HeaderOption';
 
 function Header() {
   return (
-    <div className="header">
+    <header className="header">
       <div className="header_left">
         <img
           src="https://cdn-icons.flaticon.com/png/512/3536/premium/3536505.png?token=exp=1647377394~hmac=2c98d16584f6b6c08b771a9ac9348138"
@@ -32,7 +32,7 @@ function Header() {
           title="me"
         />
       </div>
-    </div>
+    </header>
   );
 }
 
