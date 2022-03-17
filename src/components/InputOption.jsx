@@ -12,9 +12,14 @@ function InputOption({ Icon, title, color }) {
 }
 
 InputOption.propTypes = {
-  Icon: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
-  color: PropTypes.string.isRequired,
+  Icon: PropTypes.instanceOf(Object).isRequired,
+  title: PropTypes.string,
+  color: PropTypes.string,
+};
+
+InputOption.defaultProps = {
+  color: '#666666',
+  title: '',
 };
 
 export default InputOption;

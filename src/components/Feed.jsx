@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Feed.scss';
 import { Avatar } from '@mui/material';
 import PhotoIcon from '@mui/icons-material/Photo';
@@ -6,14 +6,34 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import EventIcon from '@mui/icons-material/Event';
 import ArticleIcon from '@mui/icons-material/Article';
 import InputOption from './InputOption';
+import Post from './Post';
+import FeedModal from './FeedModal';
 
 function Feed() {
+  const [openModal, setOpenModal] = useState(false);
+  const [posts, setPosts] = useState([]);
+
   return (
     <main className="feed">
+      <FeedModal
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+        posts={posts}
+        setPosts={setPosts}
+        name="Adam Pietkiewicz"
+        photoUrl="https://lh3.googleusercontent.com/a-/AOh14GjtE7W8lwvqhMbUEIVYupR08cY0TzFX3prMW84SOA=s96-c-rg-br100"
+      />
       <div className="feed_inputContainer">
         <div className="feed_input">
           <Avatar />
-          <div className="feed_startPost">Start a post</div>
+          <button
+            type="button"
+            className="feed_startPost"
+            onClick={() => setOpenModal(true)}
+            onKeyUp={(e) => e.key === 'Enter' && setOpenModal(true)}
+          >
+            Start a post
+          </button>
         </div>
         <div className="feed_inputOptions">
           <InputOption Icon={PhotoIcon} title="Photo" color="#70b5f9" />
@@ -22,6 +42,15 @@ function Feed() {
           <InputOption Icon={ArticleIcon} title="Article" color="#fc9295" />
         </div>
       </div>
+      {/* {posts.map(() => (
+        <Post />
+      ))} */}
+      <Post
+        name="Adam Pietkiewicz"
+        description="Description"
+        message="This is a message"
+        photoUrl=""
+      />
     </main>
   );
 }

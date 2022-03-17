@@ -17,8 +17,12 @@
     font-weight: 600;
     .feed_startPost {
       flex: 1;
+      color: $dark-gray;
+      text-align: left;
+      background-color: transparent;
       border: 1px solid $dark-gray;
       border-radius: 30px;
+      outline: none;
       padding: 10px;
       margin-left: 10px;
       transition: 0.1s;

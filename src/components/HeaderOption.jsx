@@ -14,13 +14,13 @@ function HeaderOption({ Icon, title, avatar }) {
 }
 
 HeaderOption.propTypes = {
-  Icon: PropTypes.func,
+  Icon: PropTypes.instanceOf(Object),
   title: PropTypes.string.isRequired,
   avatar: PropTypes.string,
 };
 
 HeaderOption.defaultProps = {
-  Icon: () => null,
+  Icon: null,
   avatar: '',
 };
 
