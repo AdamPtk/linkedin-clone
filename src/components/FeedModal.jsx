@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './FeedModal.scss';
 import PropTypes from 'prop-types';
 import { Avatar, Modal } from '@mui/material';
@@ -10,20 +10,26 @@ import TopicIcon from '@mui/icons-material/Topic';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import CelebrationIcon from '@mui/icons-material/Celebration';
 import PollIcon from '@mui/icons-material/Poll';
+import firebase from 'firebase/compat/app';
+import { db } from '../firebase/firebase';
 import InputOption from './InputOption';
 
-function FeedModal({
-  openModal,
-  setOpenModal,
-  posts,
-  setPosts,
-  name,
-  photoUrl,
-}) {
-  console.log(setPosts, posts);
+function FeedModal({ openModal, setOpenModal, name, photoUrl }) {
+  const [message, setMessage] = useState('');
 
   const submitPost = (e) => {
     e.preventDefault();
+
+    db.collection('posts').add({
+      name: 'Adam Pietkiewicz',
+      description: 'description',
+      message,
+      photoUrl: '',
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+
+    setMessage('');
+    setOpenModal(false);
   };
 
   return (
@@ -48,6 +54,8 @@ function FeedModal({
         <form>
           <div className="feedModal_message">
             <textarea
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
               placeholder="What do you want to talk about?"
               rows="10"
               required
@@ -77,8 +85,6 @@ function FeedModal({
 FeedModal.propTypes = {
   openModal: PropTypes.bool.isRequired,
   setOpenModal: PropTypes.func.isRequired,
-  posts: PropTypes.instanceOf(Array).isRequired,
-  setPosts: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   photoUrl: PropTypes.string,
 };
