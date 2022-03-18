@@ -10,6 +10,9 @@
   margin: 0 auto;
   padding: 50px;
   background-color: $elem-color;
+  border-radius: 10px;
+  border: 1px solid $light-gray;
+
   img {
     object-fit: contain;
     height: 70px;

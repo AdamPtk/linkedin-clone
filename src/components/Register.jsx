@@ -19,6 +19,7 @@ function Register() {
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((userAuth) => {
+        navigate('/feed');
         userAuth.user
           .updateProfile({
             displayName: name,
@@ -31,7 +32,6 @@ function Register() {
                 displayName: userAuth.user.displayName,
               }),
             );
-            navigate('/');
           });
       })
       .catch((err) => alert(err));

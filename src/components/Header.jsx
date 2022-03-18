@@ -7,16 +7,19 @@ import PeopleIcon from '@mui/icons-material/People';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import ChatIcon from '@mui/icons-material/Chat';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import { useNavigate } from 'react-router-dom';
 import HeaderOption from './HeaderOption';
 import { auth } from '../firebase/firebase';
 import { logout } from '../features/userSlice';
 
 function Header() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     dispatch(logout());
     auth.signOut();
+    navigate('/');
   };
 
   return (

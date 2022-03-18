@@ -13,11 +13,13 @@ function HeaderOption({ Icon, title, avatar, onClick }) {
       tabIndex={0}
       className="headerOption"
       onClick={onClick}
-      onKeyDown={(e) => e.key === 'Escape' && onClick}
+      onKeyDown={() => {}}
     >
       {Icon && <Icon className="headerOption_icon" />}
       {avatar && (
-        <Avatar className="headerOption_avatar">{user?.displayName[0]}</Avatar>
+        <Avatar className="headerOption_avatar">
+          {user.displayName ? user.displayName[0] : null}
+        </Avatar>
       )}
       <p className="headerOption_title">{title}</p>
     </div>

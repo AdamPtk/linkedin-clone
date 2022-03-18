@@ -36,12 +36,11 @@ function Feed() {
       <FeedModal
         openModal={openModal}
         setOpenModal={setOpenModal}
-        name={user.displayName}
         photoUrl=" "
       />
       <div className="feed_inputContainer">
         <div className="feed_input">
-          <Avatar>{user?.displayName[0]}</Avatar>
+          <Avatar>{user.displayName ? user.displayName[0] : null}</Avatar>
           <button
             type="button"
             className="feed_startPost"

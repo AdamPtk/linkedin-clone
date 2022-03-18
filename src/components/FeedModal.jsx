@@ -16,7 +16,7 @@ import { db } from '../firebase/firebase';
 import InputOption from './InputOption';
 import { selectUser } from '../features/userSlice';
 
-function FeedModal({ openModal, setOpenModal, name, photoUrl }) {
+function FeedModal({ openModal, setOpenModal, photoUrl }) {
   const [message, setMessage] = useState('');
   const user = useSelector(selectUser);
 
@@ -52,9 +52,9 @@ function FeedModal({ openModal, setOpenModal, name, photoUrl }) {
         </div>
         <div className="feedModal_info">
           <Avatar src={photoUrl} alt="">
-            {user?.displayName[0]}
+            {user.displayName ? user.displayName[0] : null}
           </Avatar>
-          <h4>{name}</h4>
+          <h4>{user.displayName && user.displayName}</h4>
         </div>
         <form>
           <div className="feedModal_message">
@@ -90,7 +90,6 @@ function FeedModal({ openModal, setOpenModal, name, photoUrl }) {
 FeedModal.propTypes = {
   openModal: PropTypes.bool.isRequired,
   setOpenModal: PropTypes.func.isRequired,
-  name: PropTypes.string.isRequired,
   photoUrl: PropTypes.string,
 };
 

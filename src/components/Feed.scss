@@ -11,6 +11,7 @@
   border-radius: 10px;
   padding: 10px 10px 5px;
   color: $dark-gray;
+  margin-bottom: 20px;
   .feed_input {
     display: flex;
     align-items: center;
@@ -23,7 +24,7 @@
       border: 1px solid $dark-gray;
       border-radius: 30px;
       outline: none;
-      padding: 10px;
+      padding: 15px;
       margin-left: 10px;
       transition: 0.1s;
       cursor: pointer;

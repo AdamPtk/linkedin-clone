@@ -9,6 +9,7 @@ import Register from './Register';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import Feed from './Feed';
+import Widgets from './Widgets';
 
 function App() {
   const user = useSelector(selectUser);
@@ -29,7 +30,7 @@ function App() {
       }
     });
   }, []);
-  console.log(user);
+
   return (
     <div className="app">
       {!user ? (
@@ -43,8 +44,9 @@ function App() {
           <div className="app_body">
             <Sidebar />
             <Routes>
-              <Route path="/" element={<Feed />} />
+              <Route path="/feed" element={<Feed />} />
             </Routes>
+            <Widgets />
           </div>
         </>
       )}

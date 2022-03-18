@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Login.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useDispatch } from 'react-redux';
@@ -11,6 +11,7 @@ function Login() {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -18,6 +19,7 @@ function Login() {
     auth
       .signInWithEmailAndPassword(email, password)
       .then((userAuth) => {
+        navigate('/feed');
         dispatch(
           login({
             email: userAuth.user.email,
