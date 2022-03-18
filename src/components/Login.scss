@@ -1,0 +1,33 @@
+@import '../styles/variables';
+
+.login {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  margin: 0 auto;
+  padding: 50px;
+  background-color: $elem-color;
+  img {
+    object-fit: contain;
+    height: 70px;
+    margin: 20px 0;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  &_input {
+    margin-bottom: 15px !important;
+  }
+  > p {
+    margin-top: 20px;
+  }
+  &_register {
+    color: $main-color;
+    text-decoration: none;
+    cursor: pointer;
+  }
+}

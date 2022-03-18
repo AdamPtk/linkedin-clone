@@ -2,12 +2,23 @@ import React from 'react';
 import './HeaderOption.scss';
 import PropTypes from 'prop-types';
 import { Avatar } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../features/userSlice';
 
-function HeaderOption({ Icon, title, avatar }) {
+function HeaderOption({ Icon, title, avatar, onClick }) {
+  const user = useSelector(selectUser);
   return (
-    <div className="headerOption">
+    <div
+      role="button"
+      tabIndex={0}
+      className="headerOption"
+      onClick={onClick}
+      onKeyDown={(e) => e.key === 'Escape' && onClick}
+    >
       {Icon && <Icon className="headerOption_icon" />}
-      {avatar && <Avatar className="headerOption_icon" src={avatar} />}
+      {avatar && (
+        <Avatar className="headerOption_avatar">{user?.displayName[0]}</Avatar>
+      )}
       <p className="headerOption_title">{title}</p>
     </div>
   );
@@ -16,12 +27,14 @@ function HeaderOption({ Icon, title, avatar }) {
 HeaderOption.propTypes = {
   Icon: PropTypes.instanceOf(Object),
   title: PropTypes.string.isRequired,
-  avatar: PropTypes.string,
+  avatar: PropTypes.bool,
+  onClick: PropTypes.func,
 };
 
 HeaderOption.defaultProps = {
   Icon: null,
-  avatar: '',
+  onClick: () => {},
+  avatar: false,
 };
 
 export default HeaderOption;

@@ -11,18 +11,21 @@ import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import CelebrationIcon from '@mui/icons-material/Celebration';
 import PollIcon from '@mui/icons-material/Poll';
 import firebase from 'firebase/compat/app';
+import { useSelector } from 'react-redux';
 import { db } from '../firebase/firebase';
 import InputOption from './InputOption';
+import { selectUser } from '../features/userSlice';
 
 function FeedModal({ openModal, setOpenModal, name, photoUrl }) {
   const [message, setMessage] = useState('');
+  const user = useSelector(selectUser);
 
   const submitPost = (e) => {
     e.preventDefault();
 
     db.collection('posts').add({
-      name: 'Adam Pietkiewicz',
-      description: 'description',
+      name: user.displayName,
+      description: user.email,
       message,
       photoUrl: '',
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
@@ -48,7 +51,9 @@ function FeedModal({ openModal, setOpenModal, name, photoUrl }) {
           />
         </div>
         <div className="feedModal_info">
-          <Avatar src={photoUrl} alt="" />
+          <Avatar src={photoUrl} alt="">
+            {user?.displayName[0]}
+          </Avatar>
           <h4>{name}</h4>
         </div>
         <form>

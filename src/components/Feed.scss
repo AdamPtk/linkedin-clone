@@ -2,6 +2,7 @@
 
 .feed {
   flex: 0.6;
+  margin: 0 20px;
 }
 
 .feed_inputContainer {
@@ -14,7 +15,6 @@
     display: flex;
     align-items: center;
     font-size: 13px;
-    font-weight: 600;
     .feed_startPost {
       flex: 1;
       color: $dark-gray;

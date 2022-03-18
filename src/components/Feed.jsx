@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import './Feed.scss';
+import { useSelector } from 'react-redux';
 import { Avatar } from '@mui/material';
 import PhotoIcon from '@mui/icons-material/Photo';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import EventIcon from '@mui/icons-material/Event';
 import ArticleIcon from '@mui/icons-material/Article';
+import FlipMove from 'react-flip-move';
 import InputOption from './InputOption';
 import { db } from '../firebase/firebase';
+import { selectUser } from '../features/userSlice';
 import Post from './Post';
 import FeedModal from './FeedModal';
 
 function Feed() {
   const [openModal, setOpenModal] = useState(false);
   const [posts, setPosts] = useState([]);
+  const user = useSelector(selectUser);
 
   useEffect(() => {
     db.collection('posts')
@@ -32,12 +36,12 @@ function Feed() {
       <FeedModal
         openModal={openModal}
         setOpenModal={setOpenModal}
-        name="Adam Pietkiewicz"
-        photoUrl="https://lh3.googleusercontent.com/a-/AOh14GjtE7W8lwvqhMbUEIVYupR08cY0TzFX3prMW84SOA=s96-c-rg-br100"
+        name={user.displayName}
+        photoUrl=" "
       />
       <div className="feed_inputContainer">
         <div className="feed_input">
-          <Avatar />
+          <Avatar>{user?.displayName[0]}</Avatar>
           <button
             type="button"
             className="feed_startPost"
@@ -54,15 +58,17 @@ function Feed() {
           <InputOption Icon={ArticleIcon} title="Article" color="#fc9295" />
         </div>
       </div>
-      {posts.map(({ id, data: { name, description, message, photoUrl } }) => (
-        <Post
-          key={id}
-          name={name}
-          description={description}
-          message={message}
-          photoUrl={photoUrl}
-        />
-      ))}
+      <FlipMove>
+        {posts.map(({ id, data: { name, description, message, photoUrl } }) => (
+          <Post
+            key={id}
+            name={name}
+            description={description}
+            message={message}
+            photoUrl={photoUrl}
+          />
+        ))}
+      </FlipMove>
     </main>
   );
 }

@@ -4,9 +4,10 @@
   background-color: $bg-color;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 
 .app_body {
   display: flex;
-  margin: 20px 0;
+  margin: 20px;
 }

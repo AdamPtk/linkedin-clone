@@ -1,5 +1,6 @@
 import React from 'react';
 import './Header.scss';
+import { useDispatch } from 'react-redux';
 import SearchIcon from '@mui/icons-material/Search';
 import HomeIcon from '@mui/icons-material/Home';
 import PeopleIcon from '@mui/icons-material/People';
@@ -7,8 +8,17 @@ import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import ChatIcon from '@mui/icons-material/Chat';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import HeaderOption from './HeaderOption';
+import { auth } from '../firebase/firebase';
+import { logout } from '../features/userSlice';
 
 function Header() {
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    auth.signOut();
+  };
+
   return (
     <header className="header">
       <div className="header_left">
@@ -27,10 +37,7 @@ function Header() {
         <HeaderOption Icon={BusinessCenterIcon} title="Jobs" />
         <HeaderOption Icon={ChatIcon} title="Messages" />
         <HeaderOption Icon={NotificationsIcon} title="Notifications" />
-        <HeaderOption
-          avatar="https://lh3.googleusercontent.com/a-/AOh14GjtE7W8lwvqhMbUEIVYupR08cY0TzFX3prMW84SOA=s96-c-rg-br100"
-          title="me"
-        />
+        <HeaderOption onClick={handleLogout} title="me" avatar />
       </div>
     </header>
   );
