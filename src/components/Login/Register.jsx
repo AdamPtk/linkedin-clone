@@ -4,8 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useDispatch } from 'react-redux';
-import { auth } from '../firebase/firebase';
-import { login } from '../features/userSlice';
+import { auth } from '../../firebase/firebase';
+import { login } from '../../features/userSlice';
 
 function Register() {
   const [name, setName] = useState('');

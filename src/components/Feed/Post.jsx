@@ -6,7 +6,7 @@ import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ChatIcon from '@mui/icons-material/Chat';
 import ShareIcon from '@mui/icons-material/Share';
 import SendIcon from '@mui/icons-material/Send';
-import InputOption from './InputOption';
+import InputOption from '../atoms/IconButton';
 
 const Post = forwardRef(({ name, description, message, photoUrl }, ref) => (
   <div ref={ref} className="post">

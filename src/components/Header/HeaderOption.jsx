@@ -2,8 +2,9 @@ import React from 'react';
 import './HeaderOption.scss';
 import PropTypes from 'prop-types';
 import { Avatar } from '@mui/material';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { useSelector } from 'react-redux';
-import { selectUser } from '../features/userSlice';
+import { selectUser } from '../../features/userSlice';
 
 function HeaderOption({ Icon, title, avatar, onClick }) {
   const user = useSelector(selectUser);
@@ -21,7 +22,10 @@ function HeaderOption({ Icon, title, avatar, onClick }) {
           {user.displayName ? user.displayName[0] : null}
         </Avatar>
       )}
-      <p className="headerOption_title">{title}</p>
+      <p className="headerOption_title">
+        {title}
+        {avatar && <ArrowDropDownIcon />}
+      </p>
     </div>
   );
 }

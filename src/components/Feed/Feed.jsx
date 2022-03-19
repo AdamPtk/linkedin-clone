@@ -7,9 +7,9 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import EventIcon from '@mui/icons-material/Event';
 import ArticleIcon from '@mui/icons-material/Article';
 import FlipMove from 'react-flip-move';
-import InputOption from './InputOption';
-import { db } from '../firebase/firebase';
-import { selectUser } from '../features/userSlice';
+import IconButton from '../atoms/IconButton';
+import { db } from '../../firebase/firebase';
+import { selectUser } from '../../features/userSlice';
 import Post from './Post';
 import FeedModal from './FeedModal';
 
@@ -51,10 +51,10 @@ function Feed() {
           </button>
         </div>
         <div className="feed_inputOptions">
-          <InputOption Icon={PhotoIcon} title="Photo" color="#70b5f9" />
-          <InputOption Icon={YouTubeIcon} title="Video" color="#7fc15e" />
-          <InputOption Icon={EventIcon} title="Event" color="#e7a33e" />
-          <InputOption Icon={ArticleIcon} title="Article" color="#fc9295" />
+          <IconButton Icon={PhotoIcon} title="Photo" color="#70b5f9" />
+          <IconButton Icon={YouTubeIcon} title="Video" color="#7fc15e" />
+          <IconButton Icon={EventIcon} title="Event" color="#e7a33e" />
+          <IconButton Icon={ArticleIcon} title="Article" color="#fc9295" />
         </div>
       </div>
       <FlipMove>

@@ -1,10 +1,10 @@
-@import '../styles/variables';
+@import '../../styles/variables';
 
 .header {
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
   border-bottom: 1px solid $light-gray;
-  padding: 10px 0;
   width: 100%;
   position: sticky;
   top: 0;
@@ -14,6 +14,7 @@
 
 .header_left {
   display: flex;
+  padding: 9px 0;
   img {
     object-fit: contain;
     height: 40px;
@@ -37,4 +38,17 @@
 
 .header_right {
   display: flex;
+  > a {
+    text-decoration: none;
+    border: none;
+    &:visited {
+      outline: none;
+    }
+  }
+  a.active {
+    border-bottom: 2px solid $hover-color;
+    > .headerOption {
+      color: $hover-color;
+    }
+  }
 }

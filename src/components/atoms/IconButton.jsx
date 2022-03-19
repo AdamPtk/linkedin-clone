@@ -1,10 +1,10 @@
 import React from 'react';
-import './InputOption.scss';
+import './IconButton.scss';
 import PropTypes from 'prop-types';
 
 function InputOption({ Icon, title, color }) {
   return (
-    <div className="inputOption">
+    <div className="iconButton">
       <Icon style={{ color }} />
       <p>{title}</p>
     </div>

@@ -12,9 +12,9 @@ import CelebrationIcon from '@mui/icons-material/Celebration';
 import PollIcon from '@mui/icons-material/Poll';
 import firebase from 'firebase/compat/app';
 import { useSelector } from 'react-redux';
-import { db } from '../firebase/firebase';
-import InputOption from './InputOption';
-import { selectUser } from '../features/userSlice';
+import { db } from '../../firebase/firebase';
+import InputOption from '../atoms/IconButton';
+import { selectUser } from '../../features/userSlice';
 
 function FeedModal({ openModal, setOpenModal, photoUrl }) {
   const [message, setMessage] = useState('');

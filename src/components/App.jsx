@@ -1,23 +1,25 @@
 import React, { useEffect } from 'react';
 import './App.scss';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, logout, selectUser } from '../features/userSlice';
 import { auth } from '../firebase/firebase';
-import Login from './Login';
-import Register from './Register';
-import Header from './Header';
-import Sidebar from './Sidebar';
-import Feed from './Feed';
-import Widgets from './Widgets';
+import Login from './Login/Login';
+import Register from './Login/Register';
+import Header from './Header/Header';
+import Sidebar from './Feed/Sidebar';
+import Feed from './Feed/Feed';
+import Widgets from './Feed/Widgets';
 
 function App() {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     auth.onAuthStateChanged((userAuth) => {
       if (userAuth) {
+        navigate('/feed');
         dispatch(
           login({
             email: userAuth.email,

@@ -4,8 +4,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useDispatch } from 'react-redux';
-import { auth } from '../firebase/firebase';
-import { login } from '../features/userSlice';
+import { auth } from '../../firebase/firebase';
+import { login } from '../../features/userSlice';
+import linkedin from '../../assets/linkedin-logo.png';
 
 function Login() {
   const [password, setPassword] = useState('');
@@ -33,10 +34,7 @@ function Login() {
 
   return (
     <div className="login">
-      <img
-        src="https://logos-world.net/wp-content/uploads/2020/04/Linkedin-Logo-2011-2019.png"
-        alt=""
-      />
+      <img src={linkedin} alt="" />
       <form>
         <TextField
           className="login_input"
