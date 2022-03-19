@@ -7,9 +7,11 @@ import { auth } from '../firebase/firebase';
 import Login from './Login/Login';
 import Register from './Login/Register';
 import Header from './Header/Header';
-import Sidebar from './Feed/Sidebar';
-import Feed from './Feed/Feed';
-import Widgets from './Feed/Widgets';
+import FeedPage from './Pages/FeedPage';
+import MyNetworkPage from './Pages/MyNetworkPage';
+import JobsPage from './Pages/JobsPage';
+import MessagesPage from './Pages/MessagesPage';
+import NotificationsPage from './Pages/NotificationsPage';
 
 function App() {
   const user = useSelector(selectUser);
@@ -44,11 +46,13 @@ function App() {
         <>
           <Header />
           <div className="app_body">
-            <Sidebar />
             <Routes>
-              <Route path="/feed" element={<Feed />} />
+              <Route path="/feed" element={<FeedPage />} />
+              <Route path="/mynetwork" element={<MyNetworkPage />} />
+              <Route path="/jobs" element={<JobsPage />} />
+              <Route path="/messages" element={<MessagesPage />} />
+              <Route path="/notifications" element={<NotificationsPage />} />
             </Routes>
-            <Widgets />
           </div>
         </>
       )}
