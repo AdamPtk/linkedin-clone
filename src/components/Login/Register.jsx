@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import { useDispatch } from 'react-redux';
 import { auth } from '../../firebase/firebase';
 import { login } from '../../features/userSlice';
+import linkedin from '../../assets/linkedin-logo.png';
 
 function Register() {
   const [name, setName] = useState('');
@@ -19,7 +20,7 @@ function Register() {
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((userAuth) => {
-        navigate('/feed');
+        navigate('/register/avatar');
         userAuth.user
           .updateProfile({
             displayName: name,
@@ -39,10 +40,7 @@ function Register() {
 
   return (
     <div className="register">
-      <img
-        src="https://logos-world.net/wp-content/uploads/2020/04/Linkedin-Logo-2011-2019.png"
-        alt=""
-      />
+      <img src={linkedin} alt="" />
       <form>
         <TextField
           className="register_input"

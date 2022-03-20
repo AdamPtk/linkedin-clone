@@ -18,6 +18,9 @@
     "plugins": [
         "react"
     ],
+    // "required": {
+    //     "some": [ "nested", "id" ]
+    // },
     "rules": {
         "object-curly-newline": "off"
     },

@@ -6,6 +6,7 @@ import { login, logout, selectUser } from '../features/userSlice';
 import { auth } from '../firebase/firebase';
 import Login from './Login/Login';
 import Register from './Login/Register';
+import RegisterImgUpload from './Login/RegisterImgUpload';
 import Header from './Header/Header';
 import FeedPage from './Pages/FeedPage';
 import MyNetworkPage from './Pages/MyNetworkPage';
@@ -21,12 +22,14 @@ function App() {
   useEffect(() => {
     auth.onAuthStateChanged((userAuth) => {
       if (userAuth) {
+        console.log(userAuth);
         navigate('/feed');
         dispatch(
           login({
             email: userAuth.email,
             uid: userAuth.uid,
             displayName: userAuth.displayName,
+            photoURL: userAuth.photoURL,
           }),
         );
       } else {
@@ -47,6 +50,7 @@ function App() {
           <Header />
           <div className="app_body">
             <Routes>
+              <Route path="/register/avatar" element={<RegisterImgUpload />} />
               <Route path="/feed" element={<FeedPage />} />
               <Route path="/mynetwork" element={<MyNetworkPage />} />
               <Route path="/jobs" element={<JobsPage />} />

@@ -33,14 +33,12 @@ function Feed() {
 
   return (
     <main className="feed">
-      <FeedModal
-        openModal={openModal}
-        setOpenModal={setOpenModal}
-        photoUrl=" "
-      />
+      <FeedModal openModal={openModal} setOpenModal={setOpenModal} />
       <div className="feed_inputContainer">
         <div className="feed_input">
-          <Avatar>{user.displayName ? user.displayName[0] : null}</Avatar>
+          <Avatar src={user.photoURL}>
+            {user.displayName ? user.displayName[0] : null}
+          </Avatar>
           <button
             type="button"
             className="feed_startPost"
@@ -58,13 +56,13 @@ function Feed() {
         </div>
       </div>
       <FlipMove>
-        {posts.map(({ id, data: { name, description, message, photoUrl } }) => (
+        {posts.map(({ id, data: { name, description, message, photoURL } }) => (
           <Post
             key={id}
             name={name}
             description={description}
             message={message}
-            photoUrl={photoUrl}
+            photoURL={photoURL}
           />
         ))}
       </FlipMove>

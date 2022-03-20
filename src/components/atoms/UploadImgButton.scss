@@ -1,0 +1,18 @@
+@import '../../styles/variables';
+
+#uploadImgButton {
+  display: none;
+}
+
+p {
+  color: $dark-gray;
+  margin-bottom: 5px;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  > p {
+    margin-left: 10px;
+  }
+}

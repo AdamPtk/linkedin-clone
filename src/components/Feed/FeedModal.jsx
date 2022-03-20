@@ -16,7 +16,7 @@ import { db } from '../../firebase/firebase';
 import InputOption from '../atoms/IconButton';
 import { selectUser } from '../../features/userSlice';
 
-function FeedModal({ openModal, setOpenModal, photoUrl }) {
+function FeedModal({ openModal, setOpenModal }) {
   const [message, setMessage] = useState('');
   const user = useSelector(selectUser);
 
@@ -27,7 +27,7 @@ function FeedModal({ openModal, setOpenModal, photoUrl }) {
       name: user.displayName,
       description: user.email,
       message,
-      photoUrl: '',
+      photoURL: user.photoURL,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
 
@@ -51,7 +51,7 @@ function FeedModal({ openModal, setOpenModal, photoUrl }) {
           />
         </div>
         <div className="feedModal_info">
-          <Avatar src={photoUrl} alt="">
+          <Avatar src={user.photoURL} alt="">
             {user.displayName ? user.displayName[0] : null}
           </Avatar>
           <h4>{user.displayName && user.displayName}</h4>
@@ -90,11 +90,6 @@ function FeedModal({ openModal, setOpenModal, photoUrl }) {
 FeedModal.propTypes = {
   openModal: PropTypes.bool.isRequired,
   setOpenModal: PropTypes.func.isRequired,
-  photoUrl: PropTypes.string,
-};
-
-FeedModal.defaultProps = {
-  photoUrl: '',
 };
 
 export default FeedModal;

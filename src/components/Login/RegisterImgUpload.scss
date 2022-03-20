@@ -1,6 +1,6 @@
 @import '../../styles/variables';
 
-.register {
+.registerImgUpload {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -12,26 +12,11 @@
   background-color: $elem-color;
   border-radius: 10px;
   border: 1px solid $light-gray;
-
-  img {
+  > img {
     object-fit: contain;
     height: 70px;
-    margin: 20px 0;
   }
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-  &_input {
-    margin-bottom: 15px !important;
-  }
-  > p {
-    margin-top: 20px;
-    color: $dark-gray;
-  }
-  &_login {
-    color: $main-color;
-    text-decoration: none;
-    cursor: pointer;
+  p {
+    margin: 10px;
   }
 }

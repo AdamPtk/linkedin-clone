@@ -8,10 +8,10 @@ import ShareIcon from '@mui/icons-material/Share';
 import SendIcon from '@mui/icons-material/Send';
 import InputOption from '../atoms/IconButton';
 
-const Post = forwardRef(({ name, description, message, photoUrl }, ref) => (
+const Post = forwardRef(({ name, description, message, photoURL }, ref) => (
   <div ref={ref} className="post">
     <div className="post_header">
-      <Avatar src={photoUrl} alt="">
+      <Avatar src={photoURL} alt="">
         {name[0]}
       </Avatar>
       <div className="post_info">
@@ -35,11 +35,11 @@ Post.propTypes = {
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   message: PropTypes.string.isRequired,
-  photoUrl: PropTypes.string,
+  photoURL: PropTypes.string,
 };
 
 Post.defaultProps = {
-  photoUrl: '',
+  photoURL: '',
 };
 
 export default Post;
