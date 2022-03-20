@@ -14,7 +14,6 @@
 
 .header_left {
   display: flex;
-  padding: 9px 0;
   img {
     object-fit: contain;
     height: 40px;
@@ -38,6 +37,7 @@
 
 .header_right {
   display: flex;
+  align-items: center;
   > a {
     text-decoration: none;
     border: none;
