@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './FeedModal.scss';
 import PropTypes from 'prop-types';
-import { Avatar, Modal } from '@mui/material';
+import { Modal } from '@mui/material';
 import { Box } from '@mui/system';
 import CloseIcon from '@mui/icons-material/Close';
 import PhotoIcon from '@mui/icons-material/Photo';
@@ -15,6 +15,7 @@ import { useSelector } from 'react-redux';
 import { db } from '../../firebase/firebase';
 import InputOption from '../atoms/IconButton';
 import { selectUser } from '../../features/userSlice';
+import UserAvatar from '../atoms/UserAvatar';
 
 function FeedModal({ openModal, setOpenModal }) {
   const [message, setMessage] = useState('');
@@ -51,9 +52,7 @@ function FeedModal({ openModal, setOpenModal }) {
           />
         </div>
         <div className="feedModal_info">
-          <Avatar src={user.photoURL} alt="">
-            {user.displayName ? user.displayName[0] : null}
-          </Avatar>
+          <UserAvatar />
           <h4>{user.displayName && user.displayName}</h4>
         </div>
         <form>

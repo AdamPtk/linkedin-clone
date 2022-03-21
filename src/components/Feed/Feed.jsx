@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './Feed.scss';
-import { useSelector } from 'react-redux';
-import { Avatar } from '@mui/material';
 import PhotoIcon from '@mui/icons-material/Photo';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import EventIcon from '@mui/icons-material/Event';
@@ -9,14 +7,13 @@ import ArticleIcon from '@mui/icons-material/Article';
 import FlipMove from 'react-flip-move';
 import IconButton from '../atoms/IconButton';
 import { db } from '../../firebase/firebase';
-import { selectUser } from '../../features/userSlice';
 import Post from './Post';
 import FeedModal from './FeedModal';
+import UserAvatar from '../atoms/UserAvatar';
 
 function Feed() {
   const [openModal, setOpenModal] = useState(false);
   const [posts, setPosts] = useState([]);
-  const user = useSelector(selectUser);
 
   useEffect(() => {
     db.collection('posts')
@@ -36,9 +33,7 @@ function Feed() {
       <FeedModal openModal={openModal} setOpenModal={setOpenModal} />
       <div className="feed_inputContainer">
         <div className="feed_input">
-          <Avatar src={user.photoURL}>
-            {user.displayName ? user.displayName[0] : null}
-          </Avatar>
+          <UserAvatar />
           <button
             type="button"
             className="feed_startPost"
@@ -59,6 +54,7 @@ function Feed() {
         {posts.map(({ id, data: { name, description, message, photoURL } }) => (
           <Post
             key={id}
+            postId={id}
             name={name}
             description={description}
             message={message}

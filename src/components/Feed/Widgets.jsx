@@ -1,6 +1,5 @@
 import React from 'react';
 import './Widgets.scss';
-import CircularProgress from '@mui/material/CircularProgress';
 import InfoIcon from '@mui/icons-material/Info';
 
 function Widgets() {
@@ -10,9 +9,7 @@ function Widgets() {
         <h2>Add to your feed</h2>
         <InfoIcon />
       </div>
-      <div className="widgets_main">
-        <CircularProgress />
-      </div>
+      <div className="widgets_main">...</div>
     </aside>
   );
 }

@@ -2,9 +2,15 @@ import React from 'react';
 import './IconButton.scss';
 import PropTypes from 'prop-types';
 
-function InputOption({ Icon, title, color }) {
+function InputOption({ onClick, Icon, title, color }) {
   return (
-    <div className="iconButton">
+    <div
+      role="button"
+      onKeyDown={() => {}}
+      tabIndex={0}
+      onClick={onClick}
+      className="iconButton"
+    >
       <Icon style={{ color }} />
       <p>{title}</p>
     </div>
@@ -12,12 +18,14 @@ function InputOption({ Icon, title, color }) {
 }
 
 InputOption.propTypes = {
+  onClick: PropTypes.func,
   Icon: PropTypes.instanceOf(Object).isRequired,
   title: PropTypes.string,
   color: PropTypes.string,
 };
 
 InputOption.defaultProps = {
+  onClick: () => {},
   color: '#666666',
   title: '',
 };

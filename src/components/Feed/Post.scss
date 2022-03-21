@@ -29,6 +29,22 @@
 .post_body {
   overflow-wrap: anywhere;
   margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.post_statistics {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: $dark-gray;
+  margin-bottom: 3px;
+  div {
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+      color: $main-color;
+    }
+  }
 }
 
 .post_buttons {
@@ -37,4 +53,62 @@
   font-size: 14px;
   border-top: 1px solid $light-gray;
   padding-top: 5px;
+  margin-bottom: 5px;
+}
+
+.post_commentBox {
+  margin-bottom: 10px;
+  > div {
+    display: flex;
+    .post_inputSection {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      margin-left: 10px;
+      .post_input {
+        flex: 1;
+        border-radius: 20px;
+        padding: 10px;
+        outline: none;
+        border: 1px solid $dark-gray;
+        color: $dark-gray;
+      }
+      .post_button {
+        align-self: flex-start;
+        text-transform: capitalize;
+        font-weight: bold;
+        font-size: 12px;
+        border-radius: 20px;
+        padding: 2px 10px;
+        margin-top: 5px;
+        min-width: 0;
+      }
+    }
+  }
+}
+
+.post_comment {
+  display: flex;
+  margin-top: 10px;
+  .post_comment_content {
+    flex: 1;
+    background-color: $comm-bg-color;
+    border-radius: 10px;
+    border-top-left-radius: 0;
+    padding: 10px;
+    margin-left: 10px;
+    h4 {
+      font-size: 13px;
+      color: $bold-color;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    p {
+      overflow-wrap: anywhere;
+      font-size: 13px;
+      line-height: 20px;
+      margin-top: 10px;
+    }
+  }
 }

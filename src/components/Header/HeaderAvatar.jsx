@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { updateProfile } from 'firebase/auth';
 import { login, logout, selectUser } from '../../features/userSlice';
 import { auth, storage } from '../../firebase/firebase';
+import UserAvatar from '../atoms/UserAvatar';
 
 function HeaderAvatar() {
   const [image, setImage] = useState('');
@@ -90,9 +91,7 @@ function HeaderAvatar() {
         tabIndex={0}
         className="headerAvatar"
       >
-        <Avatar src={user.photoURL} className="headerAvatar_avatar">
-          {user.displayName ? user.displayName[0] : null}
-        </Avatar>
+        <UserAvatar className="headerAvatar_avatar" />
         <p className="headerAvatar_title">
           Me
           <ArrowDropDownIcon />
@@ -146,15 +145,6 @@ function HeaderAvatar() {
               {`${user.photoURL ? 'Update' : 'Add'} profile photo`}
             </Button>
           </div>
-          {/* <div
-            role="button"
-            className="headerAvatar_popover_option"
-            // onClick={handleLogout}
-            // onKeyDown={() => {}}
-            // tabIndex={0}
-          >
-            Update profile photo
-          </div> */}
           <div
             role="button"
             className="headerAvatar_popover_option"
