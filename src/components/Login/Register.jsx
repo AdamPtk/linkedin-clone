@@ -15,7 +15,6 @@ function Register() {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [image, setImage] = useState('');
-  const [uploadProgress, setUploadProgress] = useState(0);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -24,14 +23,9 @@ function Register() {
     uploadTask.on(
       'state_changed',
       (snapshot) => {
-        const progress = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
-        );
-        setUploadProgress(progress);
-        console.log(uploadProgress);
+        Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
       },
       (err) => {
-        console.log(err);
         alert(err.message);
       },
       () => {
@@ -40,7 +34,6 @@ function Register() {
           .child(image.name)
           .getDownloadURL()
           .then((url) => {
-            console.log(url);
             updateProfile(userAuth, {
               displayName: name,
               photoURL: url,

@@ -1,46 +1,24 @@
 import React from 'react';
 import './HeaderOption.scss';
 import PropTypes from 'prop-types';
-import { Avatar } from '@mui/material';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { useSelector } from 'react-redux';
-import { selectUser } from '../../features/userSlice';
 
-function HeaderOption({ Icon, title, avatar, onClick }) {
-  const user = useSelector(selectUser);
+function HeaderOption({ Icon, title }) {
   return (
     <div
       role="button"
       tabIndex={0}
       className="headerOption"
-      onClick={onClick}
       onKeyDown={() => {}}
     >
       {Icon && <Icon className="headerOption_icon" />}
-      {avatar && (
-        <Avatar src={user.photoURL} className="headerOption_avatar">
-          {user.displayName ? user.displayName[0] : null}
-        </Avatar>
-      )}
-      <p className="headerOption_title">
-        {title}
-        {avatar && <ArrowDropDownIcon />}
-      </p>
+      <p className="headerOption_title">{title}</p>
     </div>
   );
 }
 
 HeaderOption.propTypes = {
-  Icon: PropTypes.instanceOf(Object),
+  Icon: PropTypes.instanceOf(Object).isRequired,
   title: PropTypes.string.isRequired,
-  avatar: PropTypes.bool,
-  onClick: PropTypes.func,
-};
-
-HeaderOption.defaultProps = {
-  Icon: null,
-  onClick: () => {},
-  avatar: false,
 };
 
 export default HeaderOption;
