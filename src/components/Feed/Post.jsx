@@ -68,7 +68,7 @@ const Post = forwardRef(
       });
     };
 
-    const liked = () => likes.some((el) => el.uid === user.uid);
+    const liked = likes && likes.some((el) => el.uid === user.uid);
 
     return (
       <div ref={ref} className="post">
@@ -85,7 +85,9 @@ const Post = forwardRef(
           <p>{message}</p>
         </div>
         <div className="post_statistics">
-          <div>{`${likes.length} likes`}</div>
+          <div>
+            {`${likes.length} ${likes.length !== 1 ? 'likes' : 'like'}`}
+          </div>
           <div
             role="button"
             onKeyDown={() => {}}
