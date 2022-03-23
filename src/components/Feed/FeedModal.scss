@@ -70,17 +70,9 @@
   &_right {
     button {
       font-size: 14px;
-      font-weight: bold;
-      color: $elem-color;
-      border: none;
-      outline: none;
       border-radius: 20px;
-      background-color: $main-color;
-      padding: 10px 15px;
-      cursor: pointer;
-      &:hover {
-        background-color: $main-hover-color;
-      }
+      padding: 5px 15px;
+      text-transform: capitalize;
     }
   }
 }

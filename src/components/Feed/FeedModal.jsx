@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './FeedModal.scss';
 import PropTypes from 'prop-types';
-import { Modal } from '@mui/material';
+import { Button, Modal } from '@mui/material';
 import { Box } from '@mui/system';
 import CloseIcon from '@mui/icons-material/Close';
 import PhotoIcon from '@mui/icons-material/Photo';
@@ -75,9 +75,14 @@ function FeedModal({ openModal, setOpenModal }) {
               <InputOption Icon={PollIcon} />
             </div>
             <div className="feedModal_footer_right">
-              <button onClick={(e) => submitPost(e)} type="submit">
+              <Button
+                variant="contained"
+                onClick={(e) => submitPost(e)}
+                type="submit"
+                disabled={!message}
+              >
                 Post
-              </button>
+              </Button>
             </div>
           </div>
         </form>
