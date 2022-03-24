@@ -13,9 +13,10 @@ import IconButton from '../atoms/IconButton';
 import { db } from '../../firebase/firebase';
 import { selectUser } from '../../features/userSlice';
 import UserAvatar from '../atoms/UserAvatar';
+import AddedTime from '../atoms/AddedTime';
 
 const Post = forwardRef(
-  ({ postId, name, description, message, photoURL }, ref) => {
+  ({ postId, name, description, message, photoURL, timestamp }, ref) => {
     const [comments, setComments] = useState([]);
     const [comment, setComment] = useState('');
     const [likes, setLikes] = useState('');
@@ -79,6 +80,7 @@ const Post = forwardRef(
           <div className="post_info">
             <h2>{name}</h2>
             <p>{description}</p>
+            <AddedTime timestamp={timestamp} />
           </div>
         </div>
         <div className="post_body">
@@ -145,8 +147,15 @@ const Post = forwardRef(
                     {comm.displayName ? comm.displayName[0] : null}
                   </Avatar>
                   <div className="post_comment_content">
-                    <h4>{comm.username}</h4>
-                    <h6>{comm.email}</h6>
+                    <div className="post_comment_info">
+                      <div className="left">
+                        <h4>{comm.username}</h4>
+                        <h6>{comm.email}</h6>
+                      </div>
+                      <div className="right">
+                        <AddedTime timestamp={comm.timestamp} />
+                      </div>
+                    </div>
                     <p>{comm.comment}</p>
                   </div>
                 </div>
@@ -165,6 +174,7 @@ Post.propTypes = {
   description: PropTypes.string.isRequired,
   message: PropTypes.string.isRequired,
   photoURL: PropTypes.string,
+  timestamp: PropTypes.instanceOf(Object).isRequired,
 };
 
 Post.defaultProps = {

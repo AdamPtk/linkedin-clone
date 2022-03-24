@@ -29,7 +29,9 @@ function UploadImgButton({ className, image, setImage }) {
         <Button variant="outlined" component="span">
           Upload
         </Button>
-        <p>{image ? shortenImgName(image.name) : 'No file choosen'}</p>
+        <p className="uploadImg_name">
+          {image ? shortenImgName(image.name) : 'No file choosen'}
+        </p>
       </label>
     </div>
   );

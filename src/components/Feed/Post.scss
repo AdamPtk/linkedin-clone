@@ -16,11 +16,11 @@
   .post_info {
     margin-left: 10px;
     > h2 {
-      font-size: 14px;
+      font-size: 13px;
       color: $bold-color;
     }
     > p {
-      font-size: 12px;
+      font-size: 11px;
       color: $dark-gray;
     }
   }
@@ -53,11 +53,10 @@
   font-size: 14px;
   border-top: 1px solid $light-gray;
   padding-top: 5px;
-  margin-bottom: 5px;
 }
 
 .post_commentBox {
-  margin-bottom: 10px;
+  margin: 5px 0 10px;
   > div {
     display: flex;
     .post_inputSection {
@@ -90,7 +89,11 @@
 .post_comment {
   display: flex;
   margin-top: 10px;
-  .post_comment_content {
+  &_info {
+    display: flex;
+    justify-content: space-between;
+  }
+  &_content {
     flex: 1;
     background-color: $comm-bg-color;
     border-radius: 10px;
