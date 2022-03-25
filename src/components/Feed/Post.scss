@@ -103,6 +103,13 @@
     h4 {
       font-size: 13px;
       color: $bold-color;
+      span {
+        color: $elem-color;
+        font-weight: normal;
+        background-color: $dark-gray;
+        border-radius: 3px;
+        padding: 1px 5px;
+      }
     }
     h6 {
       font-weight: normal;

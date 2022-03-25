@@ -16,7 +16,10 @@ import UserAvatar from '../atoms/UserAvatar';
 import AddedTime from '../atoms/AddedTime';
 
 const Post = forwardRef(
-  ({ postId, name, description, message, photoURL, timestamp }, ref) => {
+  (
+    { authorId, postId, name, description, message, photoURL, timestamp },
+    ref,
+  ) => {
     const [comments, setComments] = useState([]);
     const [comment, setComment] = useState('');
     const [likes, setLikes] = useState('');
@@ -52,6 +55,7 @@ const Post = forwardRef(
     const postComment = (e) => {
       e.preventDefault();
       db.collection('posts').doc(postId).collection('comments').add({
+        authorId: user.uid,
         comment,
         username: user.displayName,
         photoURL: user.photoURL,
@@ -149,7 +153,11 @@ const Post = forwardRef(
                   <div className="post_comment_content">
                     <div className="post_comment_info">
                       <div className="left">
-                        <h4>{comm.username}</h4>
+                        <h4>
+                          {comm.username}
+                          &nbsp;
+                          {comm.authorId === authorId && <span>Author</span>}
+                        </h4>
                         <h6>{comm.email}</h6>
                       </div>
                       <div className="right">
@@ -170,6 +178,7 @@ const Post = forwardRef(
 
 Post.propTypes = {
   postId: PropTypes.string.isRequired,
+  authorId: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   message: PropTypes.string.isRequired,

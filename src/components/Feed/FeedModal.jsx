@@ -25,6 +25,7 @@ function FeedModal({ openModal, setOpenModal }) {
     e.preventDefault();
 
     db.collection('posts').add({
+      authorId: user.uid,
       name: user.displayName,
       description: user.email,
       message,
