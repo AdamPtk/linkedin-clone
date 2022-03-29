@@ -12,8 +12,11 @@ import UploadImgButton from '../atoms/UploadImgButton';
 
 function Register() {
   const [name, setName] = useState('');
+  const [nameError, setNameError] = useState(false);
   const [password, setPassword] = useState('');
+  const [passwordError, setPasswordError] = useState(false);
   const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState(false);
   const [image, setImage] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -55,6 +58,16 @@ function Register() {
 
   const handleRegister = (e) => {
     e.preventDefault();
+    if (name === '') {
+      setNameError(true);
+    }
+    if (email === '') {
+      setEmailError(true);
+    }
+    if (password === '') {
+      setPasswordError(true);
+      return;
+    }
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((userAuth) => {
@@ -90,6 +103,8 @@ function Register() {
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
+          error={nameError && !name}
+          helperText={nameError && !name && 'Cannot be empty'}
         />
         <TextField
           className="register_input"
@@ -98,6 +113,8 @@ function Register() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
+          error={emailError && !email}
+          helperText={emailError && !email && 'Cannot be empty'}
         />
         <TextField
           className="register_input"
@@ -106,14 +123,16 @@ function Register() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
+          error={passwordError && !password}
+          helperText={passwordError && !password && 'Cannot be empty'}
         />
-        <p>Add profile photo (optional)</p>
+        <p className="register_helper">Add profile photo (optional)</p>
         <UploadImgButton
           className="register_input"
           image={image}
           setImage={setImage}
         />
-        <p>You can also do it later</p>
+        <p className="register_helper">You can also do it later</p>
         <Button
           type="submit"
           onClick={(e) => handleRegister(e)}
@@ -122,7 +141,7 @@ function Register() {
           Join
         </Button>
       </form>
-      <p>
+      <p className="register_footer">
         Already have an account?&nbsp;
         <Link to="/" className="register_login">
           Sign In

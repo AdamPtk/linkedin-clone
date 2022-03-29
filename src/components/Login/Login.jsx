@@ -57,7 +57,7 @@ function Login() {
           Sign In
         </Button>
       </form>
-      <p>
+      <p className="login_footer">
         Not a member?&nbsp;
         <Link to="/register" className="login_register">
           Register Now

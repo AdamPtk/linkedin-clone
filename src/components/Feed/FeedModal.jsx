@@ -29,7 +29,7 @@ function FeedModal({ openModal, setOpenModal }) {
       name: user.displayName,
       description: user.email,
       message,
-      photoURL: user.photoURL,
+      photoURL: user.photoURL ? user.photoURL : null,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
 

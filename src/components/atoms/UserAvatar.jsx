@@ -8,7 +8,7 @@ function UserAvatar({ className }) {
   const user = useSelector(selectUser);
 
   return (
-    <Avatar className={className} src={user.photoURL}>
+    <Avatar className={className} src={user?.photoURL}>
       {user.displayName ? user.displayName[0] : null}
     </Avatar>
   );

@@ -25,9 +25,12 @@
   &_input {
     margin-bottom: 15px !important;
   }
-  > p {
-    margin-top: 20px;
+  &_helper {
+    margin-bottom: 10px;
     color: $dark-gray;
+  }
+  &_footer {
+    margin-top: 20px;
   }
   &_login {
     color: $main-color;
