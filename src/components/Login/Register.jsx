@@ -12,10 +12,13 @@ import UploadImgButton from '../atoms/UploadImgButton';
 
 function Register() {
   const [name, setName] = useState('');
+  const [nameLabel, setNameLabel] = useState('Full Name');
   const [nameError, setNameError] = useState(false);
   const [password, setPassword] = useState('');
+  const [passwordLabel, setPasswordLabel] = useState('Password');
   const [passwordError, setPasswordError] = useState(false);
   const [email, setEmail] = useState('');
+  const [emailLabel, setEmailLabel] = useState('Email');
   const [emailError, setEmailError] = useState(false);
   const [image, setImage] = useState('');
   const dispatch = useDispatch();
@@ -56,40 +59,80 @@ function Register() {
     );
   };
 
-  const handleRegister = (e) => {
-    e.preventDefault();
+  const validateName = () => {
     if (name === '') {
       setNameError(true);
+      setNameLabel('Cannot be empty');
+      return false;
     }
+    setNameError(false);
+    setNameLabel('Full Name');
+    return true;
+  };
+
+  const validateEmail = () => {
+    const regex = /^\S+@\S+\.\S+$/;
     if (email === '') {
       setEmailError(true);
+      setEmailLabel('Cannot be empty');
+      return false;
     }
+    if (!email.match(regex)) {
+      setEmailError(true);
+      setEmailLabel('Not valid email address');
+      return false;
+    }
+    setEmailError(false);
+    setEmailLabel('Email');
+    return true;
+  };
+
+  const validatePassword = () => {
+    const regex = /^.{6,}$/;
     if (password === '') {
       setPasswordError(true);
-      return;
+      setPasswordLabel('Cannot be empty');
+      return false;
     }
-    auth
-      .createUserWithEmailAndPassword(email, password)
-      .then((userAuth) => {
-        if (image) {
-          handleUpload(userAuth.user);
-        } else {
-          userAuth.user
-            .updateProfile({
-              displayName: name,
-            })
-            .then(() => {
-              dispatch(
-                login({
-                  email: userAuth.user.email,
-                  uid: userAuth.user.uid,
-                  displayName: userAuth.user.displayName,
-                }),
-              );
-            });
-        }
-      })
-      .catch((err) => alert(err));
+    if (!password.match(regex)) {
+      setPasswordError(true);
+      setPasswordLabel('Min 6 characters');
+      return false;
+    }
+    setPasswordError(false);
+    setPasswordLabel('Password');
+    return true;
+  };
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    validateName();
+    validateEmail();
+    validatePassword();
+    if (validateName() && validateEmail() && validatePassword()) {
+      auth
+        .createUserWithEmailAndPassword(email, password)
+        .then((userAuth) => {
+          if (image) {
+            handleUpload(userAuth.user);
+          } else {
+            userAuth.user
+              .updateProfile({
+                displayName: name,
+              })
+              .then(() => {
+                dispatch(
+                  login({
+                    email: userAuth.user.email,
+                    uid: userAuth.user.uid,
+                    displayName: userAuth.user.displayName,
+                  }),
+                );
+              });
+          }
+        })
+        .catch((err) => alert(err));
+    }
   };
 
   return (
@@ -97,34 +140,47 @@ function Register() {
       <img src={linkedin} alt="" />
       <form>
         <TextField
+          // ref={nameRef}
           className="register_input"
-          label="Full Name"
+          label={nameLabel}
           type="text"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => {
+            setName(e.target.value);
+            setNameLabel('Full Name');
+            setNameError(false);
+          }}
           required
-          error={nameError && !name}
-          helperText={nameError && !name && 'Cannot be empty'}
+          error={nameError}
+          // helperText={nameError && !name && 'Cannot be empty'}
         />
         <TextField
           className="register_input"
-          label="Email"
+          label={emailLabel}
           type="email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            setEmailLabel('Email');
+            setEmailError(false);
+          }}
           required
-          error={emailError && !email}
-          helperText={emailError && !email && 'Cannot be empty'}
+          error={emailError}
+          // helperText={emailError && !email && 'Cannot be empty'}
         />
         <TextField
           className="register_input"
-          label="Password"
+          label={passwordLabel}
           type="password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => {
+            setPassword(e.target.value);
+            setPasswordLabel('Password');
+            setPasswordError(false);
+          }}
           required
-          error={passwordError && !password}
-          helperText={passwordError && !password && 'Cannot be empty'}
+          error={passwordError}
+          // helperText={passwordError && !password && 'Cannot be empty'}
         />
         <p className="register_helper">Add profile photo (optional)</p>
         <UploadImgButton
