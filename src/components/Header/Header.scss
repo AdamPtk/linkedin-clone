@@ -1,15 +1,19 @@
 @import '../../styles/variables';
 
 .header {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
   border-bottom: 1px solid $light-gray;
   width: 100%;
   position: sticky;
   top: 0;
   z-index: 999;
   background-color: $elem-color;
+  &_container {
+    width: $xl-width;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
 .header_left {
@@ -49,6 +53,17 @@
     border-bottom: 2px solid $hover-color;
     > .headerOption {
       color: $hover-color;
+    }
+  }
+}
+
+@media screen and (max-width: ($xl-width + 10px)) {
+  .header_container {
+    width: 100%;
+  }
+  .header_left {
+    img {
+      margin-left: 10px;
     }
   }
 }

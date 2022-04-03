@@ -140,7 +140,6 @@ function Register() {
       <img src={linkedin} alt="" />
       <form>
         <TextField
-          // ref={nameRef}
           className="register_input"
           label={nameLabel}
           type="text"
@@ -152,7 +151,6 @@ function Register() {
           }}
           required
           error={nameError}
-          // helperText={nameError && !name && 'Cannot be empty'}
         />
         <TextField
           className="register_input"
@@ -166,7 +164,6 @@ function Register() {
           }}
           required
           error={emailError}
-          // helperText={emailError && !email && 'Cannot be empty'}
         />
         <TextField
           className="register_input"
@@ -180,7 +177,6 @@ function Register() {
           }}
           required
           error={passwordError}
-          // helperText={passwordError && !password && 'Cannot be empty'}
         />
         <p className="register_helper">Add profile photo (optional)</p>
         <UploadImgButton

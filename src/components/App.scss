@@ -10,6 +10,19 @@
 
 .app_body {
   display: flex;
-  width: 75%;
+  justify-content: center;
+  width: $container-xl;
   margin: 20px;
 }
+
+@media screen and (min-width: $media-l) {
+  .app_body {
+    width: $container-l;
+  }
+}
+
+// @media screen and (max-width: $l-width) {
+//   .app_body {
+//     width: $m-width;
+//   }
+// }

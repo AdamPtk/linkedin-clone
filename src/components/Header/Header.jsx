@@ -14,32 +14,37 @@ import HeaderAvatar from './HeaderAvatar';
 function Header() {
   return (
     <header className="header">
-      <div className="header_left">
-        <Link to="/feed">
-          <img src={linkedinLogo} alt="" />
-        </Link>
-        <div className="header_search">
-          <SearchIcon />
-          <input type="text" placeholder="Search" />
+      <div className="header_container">
+        <div className="header_left">
+          <Link to="/feed">
+            <img src={linkedinLogo} alt="" />
+          </Link>
+          <div className="header_search">
+            <SearchIcon />
+            <input type="text" placeholder="Search" />
+          </div>
         </div>
-      </div>
-      <div className="header_right">
-        <NavLink className={({ isActive }) => isActive && 'active'} to="/feed">
-          <HeaderOption Icon={HomeIcon} title="Home" />
-        </NavLink>
-        <NavLink to="/mynetwork">
-          <HeaderOption Icon={PeopleIcon} title="My Network" />
-        </NavLink>
-        <NavLink to="/jobs">
-          <HeaderOption Icon={BusinessCenterIcon} title="Jobs" />
-        </NavLink>
-        <NavLink to="/messages">
-          <HeaderOption Icon={ChatIcon} title="Messages" />
-        </NavLink>
-        <NavLink to="/notifications">
-          <HeaderOption Icon={NotificationsIcon} title="Notifications" />
-        </NavLink>
-        <HeaderAvatar />
+        <div className="header_right">
+          <NavLink
+            className={({ isActive }) => isActive && 'active'}
+            to="/feed"
+          >
+            <HeaderOption Icon={HomeIcon} title="Home" />
+          </NavLink>
+          <NavLink to="/mynetwork">
+            <HeaderOption Icon={PeopleIcon} title="My Network" />
+          </NavLink>
+          <NavLink to="/jobs">
+            <HeaderOption Icon={BusinessCenterIcon} title="Jobs" />
+          </NavLink>
+          <NavLink to="/messages">
+            <HeaderOption Icon={ChatIcon} title="Messages" />
+          </NavLink>
+          <NavLink to="/notifications">
+            <HeaderOption Icon={NotificationsIcon} title="Notifications" />
+          </NavLink>
+          <HeaderAvatar />
+        </div>
       </div>
     </header>
   );

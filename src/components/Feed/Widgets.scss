@@ -24,3 +24,15 @@
     height: 80%;
   }
 }
+
+@media screen and (max-width: ($xl-width + 10px)) {
+  .widgets {
+    margin-right: 10px;
+  }
+}
+
+@media screen and (max-width: $l-width) {
+  .widgets {
+    display: none;
+  }
+}
