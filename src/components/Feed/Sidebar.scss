@@ -91,8 +91,9 @@
   }
 }
 
-@media screen and (max-width: ($xl-width + 10px)) {
+
+@media screen and (max-width: $media-l) {
   .sidebar {
-    margin-left: 10px;
+    flex: 0.3
   }
 }

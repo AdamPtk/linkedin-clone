@@ -15,14 +15,20 @@
   margin: 20px;
 }
 
+@media screen and (min-width: $media-m) {
+  .app_body {
+    width: $container-m;
+  }
+}
+
 @media screen and (min-width: $media-l) {
   .app_body {
     width: $container-l;
   }
 }
 
-// @media screen and (max-width: $l-width) {
-//   .app_body {
-//     width: $m-width;
-//   }
-// }
+@media screen and (min-width: $media-xl) {
+  .app_body {
+    width: $container-xl;
+  }
+}

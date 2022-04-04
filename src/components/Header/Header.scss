@@ -8,7 +8,7 @@
   z-index: 999;
   background-color: $elem-color;
   &_container {
-    width: $xl-width;
+    width: $container-xl;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -57,7 +57,7 @@
   }
 }
 
-@media screen and (max-width: ($xl-width + 10px)) {
+@media screen and (max-width: $media-xl) {
   .header_container {
     width: 100%;
   }
