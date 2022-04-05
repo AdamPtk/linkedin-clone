@@ -36,6 +36,7 @@
   .feed_inputOptions {
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
     font-size: 13px;
     font-weight: 600;
     margin-top: 5px;
@@ -45,5 +46,11 @@
 @media screen and (max-width: $media-l) {
   .feed {
     flex: 0.7
+  }
+}
+
+@media screen and (max-width: $media-m) {
+  .feed {
+    flex: 1
   }
 }

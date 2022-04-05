@@ -91,6 +91,11 @@
   }
 }
 
+@media screen and (max-width: $media-m) {
+  .sidebar {
+    display: none;
+  }
+}
 
 @media screen and (max-width: $media-l) {
   .sidebar {

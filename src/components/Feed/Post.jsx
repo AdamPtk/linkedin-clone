@@ -9,9 +9,10 @@ import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ChatIcon from '@mui/icons-material/Chat';
 import ShareIcon from '@mui/icons-material/Share';
 import SendIcon from '@mui/icons-material/Send';
-import IconButton from '../atoms/IconButton';
 import { db } from '../../firebase/firebase';
 import { selectUser } from '../../features/userSlice';
+import useMobileDimensions from '../../modules/isMobile';
+import IconButton from '../atoms/IconButton';
 import UserAvatar from '../atoms/UserAvatar';
 import AddedTime from '../atoms/AddedTime';
 
@@ -25,6 +26,7 @@ const Post = forwardRef(
     const [likes, setLikes] = useState('');
     const [showComments, setShowComments] = useState(false);
     const user = useSelector(selectUser);
+    const isMobile = useMobileDimensions();
 
     useEffect(() => {
       let unsubscribeComments;
@@ -107,16 +109,16 @@ const Post = forwardRef(
           <IconButton
             onClick={liked ? null : like}
             Icon={liked ? ThumbUpAltIcon : ThumbUpOffAltIcon}
-            title="Like"
+            title={isMobile ? null : 'Like'}
             color={liked ? '#0a66c2' : ''}
           />
           <IconButton
             onClick={() => setShowComments(!showComments)}
             Icon={ChatIcon}
-            title="Comment"
+            title={isMobile ? null : 'Comment'}
           />
-          <IconButton Icon={ShareIcon} title="Share" />
-          <IconButton Icon={SendIcon} title="Send" />
+          <IconButton Icon={ShareIcon} title={isMobile ? null : 'Share'} />
+          <IconButton Icon={SendIcon} title={isMobile ? null : 'Send'} />
         </div>
         {showComments && (
           <>

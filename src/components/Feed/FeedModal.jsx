@@ -12,14 +12,16 @@ import CelebrationIcon from '@mui/icons-material/Celebration';
 import PollIcon from '@mui/icons-material/Poll';
 import firebase from 'firebase/compat/app';
 import { useSelector } from 'react-redux';
-import { db } from '../../firebase/firebase';
-import InputOption from '../atoms/IconButton';
 import { selectUser } from '../../features/userSlice';
+import { db } from '../../firebase/firebase';
+import useMobileDimensions from '../../modules/isMobile';
+import InputOption from '../atoms/IconButton';
 import UserAvatar from '../atoms/UserAvatar';
 
 function FeedModal({ openModal, setOpenModal }) {
   const [message, setMessage] = useState('');
   const user = useSelector(selectUser);
+  const isMobile = useMobileDimensions();
 
   const submitPost = (e) => {
     e.preventDefault();
@@ -71,9 +73,9 @@ function FeedModal({ openModal, setOpenModal }) {
               <InputOption Icon={PhotoIcon} />
               <InputOption Icon={YouTubeIcon} />
               <InputOption Icon={TopicIcon} />
-              <InputOption Icon={BusinessCenterIcon} />
-              <InputOption Icon={CelebrationIcon} />
-              <InputOption Icon={PollIcon} />
+              {!isMobile && <InputOption Icon={BusinessCenterIcon} />}
+              {!isMobile && <InputOption Icon={CelebrationIcon} />}
+              {!isMobile && <InputOption Icon={PollIcon} />}
             </div>
             <div className="feedModal_footer_right">
               <Button

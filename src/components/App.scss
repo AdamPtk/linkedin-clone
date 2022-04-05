@@ -11,8 +11,14 @@
 .app_body {
   display: flex;
   justify-content: center;
-  width: $container-xl;
+  width: 100%;
   margin: 20px;
+}
+
+@media screen and (min-width: $media-s) {
+  .app_body {
+    width: $container-s;
+  }
 }
 
 @media screen and (min-width: $media-m) {
