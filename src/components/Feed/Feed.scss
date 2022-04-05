@@ -43,6 +43,15 @@
   }
 }
 
+@media screen and (max-width: $media-s) {
+  .feed {
+    margin: 20px 0;
+  }
+  .feed_inputContainer {
+    border-radius: 0;
+  }
+}
+
 @media screen and (max-width: $media-l) {
   .feed {
     flex: 0.7
@@ -52,5 +61,8 @@
 @media screen and (max-width: $media-m) {
   .feed {
     flex: 1
+  }
+  .feed_inputContainer {
+    margin-bottom: 10px;
   }
 }

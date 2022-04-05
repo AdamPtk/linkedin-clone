@@ -15,6 +15,12 @@
   margin: 20px;
 }
 
+@media screen and (max-width: $media-s) {
+  .app_body {
+    margin: 0;
+  }
+}
+
 @media screen and (min-width: $media-s) {
   .app_body {
     width: $container-s;

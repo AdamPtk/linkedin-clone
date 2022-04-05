@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import './Feed.scss';
+import FlipMove from 'react-flip-move';
 import PhotoIcon from '@mui/icons-material/Photo';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import EventIcon from '@mui/icons-material/Event';
 import ArticleIcon from '@mui/icons-material/Article';
-import FlipMove from 'react-flip-move';
-import IconButton from '../atoms/IconButton';
 import { db } from '../../firebase/firebase';
+import useTabletDimensions from '../../modules/isTablet';
+import Sidebar from './Sidebar';
 import Post from './Post';
 import FeedModal from './FeedModal';
 import UserAvatar from '../atoms/UserAvatar';
+import IconButton from '../atoms/IconButton';
 
 function Feed() {
   const [openModal, setOpenModal] = useState(false);
   const [posts, setPosts] = useState([]);
+  const isTablet = useTabletDimensions();
 
   useEffect(() => {
     db.collection('posts')
@@ -31,6 +34,7 @@ function Feed() {
   return (
     <main className="feed">
       <FeedModal openModal={openModal} setOpenModal={setOpenModal} />
+      {isTablet && <Sidebar className="sidebarMobile" />}
       <div className="feed_inputContainer">
         <div className="feed_input">
           <UserAvatar />

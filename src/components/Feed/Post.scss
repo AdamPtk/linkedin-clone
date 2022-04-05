@@ -122,3 +122,9 @@
     }
   }
 }
+
+@media screen and (max-width: $media-s) {
+  .post {
+    border-radius: 0;
+  }
+}

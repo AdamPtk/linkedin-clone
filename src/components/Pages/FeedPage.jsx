@@ -6,7 +6,7 @@ import Widgets from '../Feed/Widgets';
 function FeedPage() {
   return (
     <>
-      <Sidebar />
+      <Sidebar className="sidebar" />
       <Feed />
       <Widgets />
     </>
