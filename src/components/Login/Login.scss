@@ -22,6 +22,7 @@
   form {
     display: flex;
     flex-direction: column;
+    align-items: center;
   }
   &_input {
     margin-bottom: 15px !important;
@@ -41,5 +42,8 @@
     width: 100vw;
     height: 100vh;
     padding: 0px;
+    form {
+      width: 60%;
+    }
   }
 }

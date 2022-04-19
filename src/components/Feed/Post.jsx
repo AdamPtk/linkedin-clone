@@ -75,6 +75,19 @@ const Post = forwardRef(
       });
     };
 
+    const dislike = () => {
+      db.collection('posts')
+        .doc(postId)
+        .collection('likes')
+        .where('uid', '==', user.uid)
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            doc.ref.delete();
+          });
+        });
+    };
+
     const liked = likes && likes.some((el) => el.uid === user.uid);
 
     return (
@@ -107,7 +120,7 @@ const Post = forwardRef(
         </div>
         <div className="post_buttons">
           <IconButton
-            onClick={liked ? null : like}
+            onClick={liked ? dislike : like}
             Icon={liked ? ThumbUpAltIcon : ThumbUpOffAltIcon}
             title={isMobile ? null : 'Like'}
             color={liked ? '#0a66c2' : ''}
