@@ -9,6 +9,7 @@ import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ChatIcon from '@mui/icons-material/Chat';
 import ShareIcon from '@mui/icons-material/Share';
 import SendIcon from '@mui/icons-material/Send';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { db } from '../../firebase/firebase';
 import { selectUser } from '../../features/userSlice';
 import useMobileDimensions from '../../modules/isMobile';
@@ -92,6 +93,7 @@ const Post = forwardRef(
 
     return (
       <div ref={ref} className="post">
+        <IconButton Icon={MoreHorizIcon} className="post_moreIcon" />
         <div className="post_header">
           <Avatar src={photoURL} alt="">
             {name[0]}

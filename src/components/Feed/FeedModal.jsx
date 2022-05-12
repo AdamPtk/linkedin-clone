@@ -15,7 +15,7 @@ import { useSelector } from 'react-redux';
 import { selectUser } from '../../features/userSlice';
 import { db } from '../../firebase/firebase';
 import useMobileDimensions from '../../modules/isMobile';
-import InputOption from '../atoms/IconButton';
+import IconButton from '../atoms/IconButton';
 import UserAvatar from '../atoms/UserAvatar';
 
 function FeedModal({ openModal, setOpenModal }) {
@@ -70,12 +70,12 @@ function FeedModal({ openModal, setOpenModal }) {
           </div>
           <div className="feedModal_footer">
             <div className="feedModal_footer_left">
-              <InputOption Icon={PhotoIcon} />
-              <InputOption Icon={YouTubeIcon} />
-              <InputOption Icon={TopicIcon} />
-              {!isMobile && <InputOption Icon={BusinessCenterIcon} />}
-              {!isMobile && <InputOption Icon={CelebrationIcon} />}
-              {!isMobile && <InputOption Icon={PollIcon} />}
+              <IconButton Icon={PhotoIcon} />
+              <IconButton Icon={YouTubeIcon} />
+              <IconButton Icon={TopicIcon} />
+              {!isMobile && <IconButton Icon={BusinessCenterIcon} />}
+              {!isMobile && <IconButton Icon={CelebrationIcon} />}
+              {!isMobile && <IconButton Icon={PollIcon} />}
             </div>
             <div className="feedModal_footer_right">
               <Button
