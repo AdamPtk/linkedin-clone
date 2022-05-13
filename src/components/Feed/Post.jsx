@@ -4,18 +4,80 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import firebase from 'firebase/compat/app';
 import { Avatar, Button } from '@mui/material';
+import Popover from '@mui/material/Popover';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ChatIcon from '@mui/icons-material/Chat';
 import ShareIcon from '@mui/icons-material/Share';
 import SendIcon from '@mui/icons-material/Send';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import FlagIcon from '@mui/icons-material/Flag';
 import { db } from '../../firebase/firebase';
 import { selectUser } from '../../features/userSlice';
 import useMobileDimensions from '../../modules/isMobile';
 import IconButton from '../atoms/IconButton';
 import UserAvatar from '../atoms/UserAvatar';
 import AddedTime from '../atoms/AddedTime';
+
+function MoreIcon({ ownPost }) {
+  const [popover, setPopover] = useState(null);
+
+  const open = Boolean(popover);
+  const id = open ? 'headerAvatar_popover' : undefined;
+
+  const handleClick = (event) => {
+    setPopover(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setPopover(null);
+  };
+  return (
+    <>
+      <IconButton
+        Icon={MoreHorizIcon}
+        onClick={handleClick}
+        className="post_moreIcon"
+      />
+      <Popover
+        id={id}
+        open={open}
+        anchorEl={popover}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+      >
+        <div className="post_moreIcon_popover">
+          {ownPost ? (
+            <>
+              <div className="post_moreIcon_popover_option">
+                <EditIcon />
+                <p>Edit post</p>
+              </div>
+              <div className="post_moreIcon_popover_option">
+                <DeleteIcon />
+                <p>Delete post</p>
+              </div>
+            </>
+          ) : (
+            <div className="post_moreIcon_popover_option">
+              <FlagIcon />
+              <p>Report</p>
+            </div>
+          )}
+        </div>
+      </Popover>
+    </>
+  );
+}
 
 const Post = forwardRef(
   (
@@ -91,9 +153,11 @@ const Post = forwardRef(
 
     const liked = likes && likes.some((el) => el.uid === user.uid);
 
+    const ownPost = user.uid === authorId;
+
     return (
       <div ref={ref} className="post">
-        <IconButton Icon={MoreHorizIcon} className="post_moreIcon" />
+        <MoreIcon ownPost={ownPost} />
         <div className="post_header">
           <Avatar src={photoURL} alt="">
             {name[0]}
@@ -205,6 +269,10 @@ Post.propTypes = {
 
 Post.defaultProps = {
   photoURL: '',
+};
+
+MoreIcon.propTypes = {
+  ownPost: PropTypes.bool.isRequired,
 };
 
 export default Post;

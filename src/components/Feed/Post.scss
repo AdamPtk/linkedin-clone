@@ -136,6 +136,22 @@
   }
 }
 
+.post_moreIcon_popover {
+  color: $dark-gray;
+  &_option {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    cursor: pointer;
+    > p {
+      padding-left: 10px;
+    }
+    &:hover {
+      background-color: $light-gray;
+    }
+  }
+}
+
 @media screen and (max-width: $media-s) {
   .post {
     border-radius: 0;
