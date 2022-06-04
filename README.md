@@ -1,6 +1,6 @@
 # LinkedIn
 
-LinkedIn clone created with React, Redux, SASS and Firebase. Feel free to register and check it out: https://linkedin-clone-f2908.web.app/
+LinkedIn clone created with React, Redux, SASS, MUI and Firebase. Feel free to register and check it out: https://linkedin-clone-f2908.web.app/
 
 ### Development:
 
