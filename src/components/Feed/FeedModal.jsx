@@ -18,7 +18,7 @@ import useMobileDimensions from '../../modules/isMobile';
 import IconButton from '../atoms/IconButton';
 import UserAvatar from '../atoms/UserAvatar';
 
-function FeedModal({ openModal, setOpenModal }) {
+function FeedModal({ openModal, setOpenModal, editModal, setEditModal }) {
   const [message, setMessage] = useState('');
   const user = useSelector(selectUser);
   const isMobile = useMobileDimensions();
@@ -42,13 +42,16 @@ function FeedModal({ openModal, setOpenModal }) {
   return (
     <Modal
       open={openModal}
-      onClose={() => setOpenModal(false)}
+      onClose={() => {
+        setOpenModal(false);
+        setEditModal(false);
+      }}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
       <Box className="feedModal">
         <div className="feedModal_header">
-          <h2>Create a post</h2>
+          <h2>{editModal ? 'Edit post' : 'Create a post'}</h2>
           <CloseIcon
             className="feedModal_header_close"
             onClick={() => setOpenModal(false)}
@@ -70,12 +73,16 @@ function FeedModal({ openModal, setOpenModal }) {
           </div>
           <div className="feedModal_footer">
             <div className="feedModal_footer_left">
-              <IconButton Icon={PhotoIcon} />
-              <IconButton Icon={YouTubeIcon} />
-              <IconButton Icon={TopicIcon} />
-              {!isMobile && <IconButton Icon={BusinessCenterIcon} />}
-              {!isMobile && <IconButton Icon={CelebrationIcon} />}
-              {!isMobile && <IconButton Icon={PollIcon} />}
+              <IconButton Icon={PhotoIcon} disabled={editModal} />
+              <IconButton Icon={YouTubeIcon} disabled={editModal} />
+              <IconButton Icon={TopicIcon} disabled={editModal} />
+              {!isMobile && (
+                <IconButton Icon={BusinessCenterIcon} disabled={editModal} />
+              )}
+              {!isMobile && (
+                <IconButton Icon={CelebrationIcon} disabled={editModal} />
+              )}
+              {!isMobile && <IconButton Icon={PollIcon} disabled={editModal} />}
             </div>
             <div className="feedModal_footer_right">
               <Button
@@ -84,7 +91,7 @@ function FeedModal({ openModal, setOpenModal }) {
                 type="submit"
                 disabled={!message}
               >
-                Post
+                {editModal ? 'Save' : 'Post'}
               </Button>
             </div>
           </div>
@@ -97,6 +104,8 @@ function FeedModal({ openModal, setOpenModal }) {
 FeedModal.propTypes = {
   openModal: PropTypes.bool.isRequired,
   setOpenModal: PropTypes.func.isRequired,
+  editModal: PropTypes.bool.isRequired,
+  setEditModal: PropTypes.func.isRequired,
 };
 
 export default FeedModal;

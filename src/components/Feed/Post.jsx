@@ -21,7 +21,7 @@ import IconButton from '../atoms/IconButton';
 import UserAvatar from '../atoms/UserAvatar';
 import AddedTime from '../atoms/AddedTime';
 
-function MoreIcon({ ownPost }) {
+function MoreIcon({ ownPost, setEditModal, setOpenModal }) {
   const [popover, setPopover] = useState(null);
 
   const open = Boolean(popover);
@@ -33,6 +33,13 @@ function MoreIcon({ ownPost }) {
 
   const handleClose = () => {
     setPopover(null);
+    setEditModal(false);
+  };
+
+  const handleEdit = () => {
+    setPopover(null);
+    setEditModal(true);
+    setOpenModal(true);
   };
   return (
     <>
@@ -58,7 +65,13 @@ function MoreIcon({ ownPost }) {
         <div className="post_moreIcon_popover">
           {ownPost ? (
             <>
-              <div className="post_moreIcon_popover_option">
+              <div
+                className="post_moreIcon_popover_option"
+                role="button"
+                onClick={handleEdit}
+                onKeyDown={() => {}}
+                tabIndex={0}
+              >
                 <EditIcon />
                 <p>Edit post</p>
               </div>
@@ -81,7 +94,17 @@ function MoreIcon({ ownPost }) {
 
 const Post = forwardRef(
   (
-    { authorId, postId, name, description, message, photoURL, timestamp },
+    {
+      authorId,
+      postId,
+      name,
+      description,
+      message,
+      photoURL,
+      timestamp,
+      setEditModal,
+      setOpenModal,
+    },
     ref,
   ) => {
     const [comments, setComments] = useState([]);
@@ -157,7 +180,11 @@ const Post = forwardRef(
 
     return (
       <div ref={ref} className="post">
-        <MoreIcon ownPost={ownPost} />
+        <MoreIcon
+          ownPost={ownPost}
+          setEditModal={setEditModal}
+          setOpenModal={setOpenModal}
+        />
         <div className="post_header">
           <Avatar src={photoURL} alt="">
             {name[0]}
@@ -265,6 +292,9 @@ Post.propTypes = {
   message: PropTypes.string.isRequired,
   photoURL: PropTypes.string,
   timestamp: PropTypes.instanceOf(Object).isRequired,
+  setEditModal: PropTypes.func.isRequired,
+
+  setOpenModal: PropTypes.func.isRequired,
 };
 
 Post.defaultProps = {
@@ -273,6 +303,8 @@ Post.defaultProps = {
 
 MoreIcon.propTypes = {
   ownPost: PropTypes.bool.isRequired,
+  setEditModal: PropTypes.func.isRequired,
+  setOpenModal: PropTypes.func.isRequired,
 };
 
 export default Post;
