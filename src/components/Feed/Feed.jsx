@@ -16,6 +16,8 @@ import IconButton from '../atoms/IconButton';
 function Feed() {
   const [openModal, setOpenModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
+  const [editState, setEditState] = useState('');
+  const [idToUpdate, setIdToUpdate] = useState('');
   const [posts, setPosts] = useState([]);
   const isTablet = useTabletDimensions();
 
@@ -39,6 +41,9 @@ function Feed() {
         setOpenModal={setOpenModal}
         setEditModal={setEditModal}
         editModal={editModal}
+        editState={editState}
+        setEditState={setEditState}
+        idToUpdate={idToUpdate}
       />
       {isTablet && <Sidebar className="sidebarMobile" />}
       <div className="feed_inputContainer">
@@ -77,6 +82,8 @@ function Feed() {
               timestamp={timestamp}
               setEditModal={setEditModal}
               setOpenModal={setOpenModal}
+              setEditState={setEditState}
+              setIdToUpdate={setIdToUpdate}
             />
           ),
         )}

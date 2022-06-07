@@ -21,7 +21,7 @@ import IconButton from '../atoms/IconButton';
 import UserAvatar from '../atoms/UserAvatar';
 import AddedTime from '../atoms/AddedTime';
 
-function MoreIcon({ ownPost, setEditModal, setOpenModal }) {
+function MoreIcon({ ownPost, setEditModal, handleDelete, handleEdit }) {
   const [popover, setPopover] = useState(null);
 
   const open = Boolean(popover);
@@ -36,11 +36,6 @@ function MoreIcon({ ownPost, setEditModal, setOpenModal }) {
     setEditModal(false);
   };
 
-  const handleEdit = () => {
-    setPopover(null);
-    setEditModal(true);
-    setOpenModal(true);
-  };
   return (
     <>
       <IconButton
@@ -68,14 +63,23 @@ function MoreIcon({ ownPost, setEditModal, setOpenModal }) {
               <div
                 className="post_moreIcon_popover_option"
                 role="button"
-                onClick={handleEdit}
+                onClick={() => {
+                  handleEdit();
+                  setPopover(false);
+                }}
                 onKeyDown={() => {}}
                 tabIndex={0}
               >
                 <EditIcon />
                 <p>Edit post</p>
               </div>
-              <div className="post_moreIcon_popover_option">
+              <div
+                className="post_moreIcon_popover_option"
+                role="button"
+                onKeyDown={() => {}}
+                tabIndex={0}
+                onClick={handleDelete}
+              >
                 <DeleteIcon />
                 <p>Delete post</p>
               </div>
@@ -104,6 +108,8 @@ const Post = forwardRef(
       timestamp,
       setEditModal,
       setOpenModal,
+      setEditState,
+      setIdToUpdate,
     },
     ref,
   ) => {
@@ -174,6 +180,17 @@ const Post = forwardRef(
         });
     };
 
+    const handleDelete = () => {
+      db.collection('posts').doc(postId).delete();
+    };
+
+    const handleEdit = () => {
+      setEditModal(true);
+      setOpenModal(true);
+      setEditState(message);
+      setIdToUpdate(postId);
+    };
+
     const liked = likes && likes.some((el) => el.uid === user.uid);
 
     const ownPost = user.uid === authorId;
@@ -184,6 +201,8 @@ const Post = forwardRef(
           ownPost={ownPost}
           setEditModal={setEditModal}
           setOpenModal={setOpenModal}
+          handleDelete={handleDelete}
+          handleEdit={handleEdit}
         />
         <div className="post_header">
           <Avatar src={photoURL} alt="">
@@ -293,8 +312,9 @@ Post.propTypes = {
   photoURL: PropTypes.string,
   timestamp: PropTypes.instanceOf(Object).isRequired,
   setEditModal: PropTypes.func.isRequired,
-
   setOpenModal: PropTypes.func.isRequired,
+  setEditState: PropTypes.func.isRequired,
+  setIdToUpdate: PropTypes.func.isRequired,
 };
 
 Post.defaultProps = {
@@ -304,7 +324,8 @@ Post.defaultProps = {
 MoreIcon.propTypes = {
   ownPost: PropTypes.bool.isRequired,
   setEditModal: PropTypes.func.isRequired,
-  setOpenModal: PropTypes.func.isRequired,
+  handleEdit: PropTypes.func.isRequired,
+  handleDelete: PropTypes.func.isRequired,
 };
 
 export default Post;

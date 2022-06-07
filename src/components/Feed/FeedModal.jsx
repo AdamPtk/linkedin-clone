@@ -18,7 +18,15 @@ import useMobileDimensions from '../../modules/isMobile';
 import IconButton from '../atoms/IconButton';
 import UserAvatar from '../atoms/UserAvatar';
 
-function FeedModal({ openModal, setOpenModal, editModal, setEditModal }) {
+function FeedModal({
+  openModal,
+  setOpenModal,
+  editModal,
+  setEditModal,
+  editState,
+  setEditState,
+  idToUpdate,
+}) {
   const [message, setMessage] = useState('');
   const user = useSelector(selectUser);
   const isMobile = useMobileDimensions();
@@ -39,12 +47,24 @@ function FeedModal({ openModal, setOpenModal, editModal, setEditModal }) {
     setOpenModal(false);
   };
 
+  const submitEdit = (e) => {
+    e.preventDefault();
+
+    db.collection('posts').doc(idToUpdate).update({
+      message,
+    });
+
+    setMessage('');
+    setOpenModal(false);
+  };
+
   return (
     <Modal
       open={openModal}
       onClose={() => {
         setOpenModal(false);
         setEditModal(false);
+        setEditState('');
       }}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
@@ -64,7 +84,7 @@ function FeedModal({ openModal, setOpenModal, editModal, setEditModal }) {
         <form>
           <div className="feedModal_message">
             <textarea
-              value={message}
+              value={message || editState}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="What do you want to talk about?"
               rows="10"
@@ -87,7 +107,7 @@ function FeedModal({ openModal, setOpenModal, editModal, setEditModal }) {
             <div className="feedModal_footer_right">
               <Button
                 variant="contained"
-                onClick={(e) => submitPost(e)}
+                onClick={(e) => (editModal ? submitEdit(e) : submitPost(e))}
                 type="submit"
                 disabled={!message}
               >
@@ -106,6 +126,9 @@ FeedModal.propTypes = {
   setOpenModal: PropTypes.func.isRequired,
   editModal: PropTypes.bool.isRequired,
   setEditModal: PropTypes.func.isRequired,
+  editState: PropTypes.string.isRequired,
+  setEditState: PropTypes.func.isRequired,
+  idToUpdate: PropTypes.string.isRequired,
 };
 
 export default FeedModal;
